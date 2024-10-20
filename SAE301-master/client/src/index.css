@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url(https://db.onlinewebfonts.com/c/a8d7b985e4eb8c5d34f2302ffe83e917?family=Nike+Futura+ND);
+
+@layer base{
+    :root{
+    --clr-black: #111111;
+    --clr-grey:#707070;
+    --clr-white: #ffffff;
+    --clr-light-grey:#cacacb;
+    --clr-bg:var(--clr-red);
+    --clr-fg:var(--clr-blue);
+
+}
+@font-face {
+    font-family: "Nike Futura ND";
+    src: url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.eot");
+    src: url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.svg#Nike Futura ND")format("svg");
+}
+}

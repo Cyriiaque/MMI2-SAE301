@@ -1,14 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SAE 3.01 - Client side</title>
-</head>
-<body>
-    <h1 class="text-4xl font-extrabold text-center text-gray-800 mt-8 mb-4">Welcome to SAE 3.01</h1>
-    <section id="main"></section>
+    <link rel="stylesheet" href="./src/dist/output.css" />
+  </head>
+  <body class="bg-white-color font-base">
+    <nav class="bg-white-color border-light-grey-color shadow-md relative z-50">
+      <div
+        class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center text-center justify-between mx-auto p-4 h-16"
+      >
+        <a href="https://nike.com/" class="flex items-center space">
+          <picture>
+            <source srcset="./src/assets/nike2.svg" media="(min-width: 48em)" />
+            <img src="./src/assets/nike.svg" alt="" class="w-10" />
+          </picture>
+        </a>
+        <div class="flex items-center md:order-2 space-x-1 md:space-x-2">
+          <a
+            href="#"
+            class="text-grey-color hover:bg-light-grey-color font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              class="icon-btn"
+              focusable="false"
+              viewBox="0 0 24 24"
+              role="img"
+              width="24px"
+              height="24px"
+              fill="none"
+              aria-label="Profile"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                d="M3.75 21v-3a3.75 3.75 0 013.75-3.75h9A3.75 3.75 0 0120.25 18v3m-4.5-13.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+              />
+            </svg>
+          </a>
+          <a
+            href="#"
+            class="text-grey-color hover:bg-light-grey-color font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 24 24"
+              role="img"
+              width="24px"
+              height="24px"
+              fill="none"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="1.5"
+                d="M8.25 8.25V6a2.25 2.25 0 012.25-2.25h3a2.25 2.25 0 110 4.5H3.75v8.25a3.75 3.75 0 003.75 3.75h9a3.75 3.75 0 003.75-3.75V8.25H17.5"
+              />
+            </svg>
+          </a>
+
+          <button
+            id="mobile-menu-button"
+            data-collapse-toggle="mega-menu-icons"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-black-color rounded-lg md:hidden hover:bg-light-grey-color"
+            aria-controls="mega-menu-icons"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div id="mobile-menu" class="hidden w-full md:block md:w-auto z-50">
+          <ul
+            class="font-medium flex items-center flex-col p-4 md:p-0 mt-4 border border-light-grey-color rounded-lg bg-white-color md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white"
+          >
+            <li class="w-32 md:w-auto">
+              <a
+                href="#"
+                class="block py-2 px-3 text-black-color rounded hover:bg-light-grey-color hover:text-white-color md:hover:text-grey-color md:hover:bg-transparent md:border-0 md:p-0"
+                >Nouveautés</a
+              >
+            </li>
+            <section id="category" class="w-32 md:w-auto flex md:flex-row flex-col md:gap-8"></section>
+            <li class="w-32 md:w-auto">
+              <a
+                href="#"
+                class="block py-2 px-3 text-black-color rounded hover:bg-light-grey-color hover:text-white-color md:hover:text-grey-color md:hover:bg-transparent md:border-0 md:p-0"
+                >Offres</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="relative">
+      <img
+        class="object-cover bg-no-repeat max-h-screen min-w-full aspect-video relative"
+        src="./src/assets/ZM+SUPERFLY+10+ELITE+FG.png"
+        alt="background"
+      />
+      <div
+        class="absolute inset-0 2xl:shadow-customPC md:shadow-custom shadow-customMobile w-full max-h-screen min-w-full aspect-video"
+      >
+        <h2
+          class="absolute left-4 bottom-4 md:bottom-16 md:left-16 2xl:bottom-36 font-nike text-white-color text-lg md:text-3xl uppercase"
+        >
+          Vêtement nike fitness
+        </h2>
+      </div>
+    </div>
+    <script>
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+    <h2 class="text-3xl font-semibold pt-8 px-8 font-nike">Plus d'article</h2>
+    <section
+      class="flex flex-row gap-8 overflow-x-auto shadow-md relative z-50  py-12 px-12"
+      id="main"
+    ></section>
+    <footer class="bg-white-color flex flex-col text-center py-8">
+      <section
+        class="flex gap-2 flex-wrap md:flex-row flex-col justify-around items-center md:items-start"
+      >
+        <div class="flex justify-center items-center flex-col text-sm">
+          <h2 class="text-black-color font-semibold">Ressources</h2>
+          <ul class="text-grey-color flex justify-center items-center flex-col text-sm">
+            <li>Cartes cadeaux</li>
+            <li>Trouver un magasin</li>
+            <li>Nike Journal</li>
+            <li>Devenir membre</li>
+          </ul>
+        </div>
+        <div class="flex justify-center items-center flex-col">
+          <h2 class="text-black-color font-semibold">Aide</h2>
+          <ul class="text-grey-color flex justify-center items-center flex-col text-sm">
+            <li>Aide</li>
+            <li>Status de la commande</li>
+            <li>Expédition</li>
+            <li>Retours</li>
+          </ul>
+        </div>
+        <div class="flex justify-center items-center flex-col">
+          <h2 class="text-black-color font-semibold">Entreprise</h2>
+          <ul class="text-grey-color flex justify-center items-center flex-col text-sm">
+            <li>A propos de Nike</li>
+            <li>Actualités</li>
+            <li>Carrières</li>
+            <li>Investisseurs</li>
+          </ul>
+        </div>
+      </section>
+      <div class="flex flex-row py-4 items-center justify-center">
+        <ul
+          class="flex flex-row flex-wrap text-sm items-center justify-center gap-2 text-center"
+        >
+          <li>© 2024 Nike, Inc. Tous droits réservés</li>
+          <li>Guides</li>
+          <li>Conditions d'utilisation</li>
+          <li>Conditions générales de vente</li>
+          <li>Informations sur l’entreprise</li>
+        </ul>
+      </div>
+    </footer>
     <script type="module" src="src/main.js"></script>
-   
-</body>
+  </body>
 </html>

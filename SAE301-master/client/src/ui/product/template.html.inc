@@ -1,4 +1,4 @@
-<article class="max-w-sm rounded-lg overflow-hidden shadow-md p-6 bg-gray-100">
-  <span class="block text-gray-600 text-sm">{{id_product}}</span>
-  <span class="block text-gray-800 font-semibold text-2xl mb-4">{{name}}</span>
-</article>
+<div class="bg-white-color w-fit relative">
+    <img class="min-w-60" src="{{image}}" alt="Chaussure">
+    <h3 class="py-2 px-3 text-black-color bg-white-color rounded-3xl font-semibold absolute left-4 bottom-4 cursor-pointer">{{name}}</h3>
+</div>
