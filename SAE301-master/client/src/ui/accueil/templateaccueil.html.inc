@@ -16,6 +16,6 @@
 </div>
 <h2 class="text-3xl font-semibold pt-8 px-8 font-nike">Tout les produits</h2>
 <section
-    class="grid md:grid-cols-3 grid-cols-1 content-center gap-4 gap-8 shadow-md relative py-12 px-12"
+    class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 content-center gap-4 gap-8 shadow-md relative py-12 px-12"
     id="products"
 ></section>

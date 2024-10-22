@@ -2,7 +2,7 @@
         <h1 class="font-semibold text-black-color">Produit :</h1>
         <h2 class="font-medium text-grey-color">{{type}}</h2>
     </div>
-    <div class="flex md:flex-row flex-col mx-6 md:mx-20 gap-4 content-center">
+    <div class="flex md:flex-row flex-col mx-6 md:mx-20 gap-4 content-center md:justify-start justify-center items-center md:items-start content-center">
         <div class="flex flex-col max-w-48 gap-4">
             <select class="bg-white-color py-2 px-3 border-solid border-2 border-black-color" name="sexe" id="sexe">
                 <option value="" disabled selected>Choisissez le sexe</option>
@@ -25,6 +25,6 @@
                 <option value="xl">XXXL (Pour Monsieur Poulbière)</option>
             </select>
         </div>
-        <section class="sm:flex-row static grid md:grid-cols-3 grid-cols-1 gap-4 content-center" id="type">
+        <section class="sm:flex-row static grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 content-center" id="type">
         </section>
     </div>

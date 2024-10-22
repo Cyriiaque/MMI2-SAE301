@@ -150,6 +150,8 @@ C.loadTypeTemplate = async function (ev) {
   } else {
     console.error("Element with data-id not found.");
   }
+  let cardProduct = document.querySelector("#type");
+  cardProduct.addEventListener("click", C.loadCardTemplate);
 }
 let category = document.querySelector("#category");
 category.addEventListener("click", C.loadTypeTemplate);
@@ -159,6 +161,7 @@ C.loadCardTemplate = async function (ev) {
   console.log(article);
   if (article) {
     let id = article.dataset.id;
+    console.log(article.dataset.id);
       let datacard = await CardData.fetch(id);
       let html = CardView.render(datacard);
       document.querySelector("#main").innerHTML = html;
