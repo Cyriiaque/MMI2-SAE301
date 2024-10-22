@@ -9,8 +9,13 @@
     --clr-grey:#707070;
     --clr-white: #ffffff;
     --clr-light-grey:#cacacb;
-    --clr-bg:var(--clr-red);
-    --clr-fg:var(--clr-blue);
+    --clr-red:#ff0000;
+    --clr-blue:#0000ff;
+    --clr-green:#00ff00;
+    --clr-yellow:#ffff00;
+    --clr-orange:#ff7f00;
+    --clr-purple:#7f00ff;
+    --clr-pink:#ff007f;
 
 }
 @font-face {
@@ -22,4 +27,30 @@
     url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.ttf")format("truetype"),
     url("https://db.onlinewebfonts.com/t/a8d7b985e4eb8c5d34f2302ffe83e917.svg#Nike Futura ND")format("svg");
 }
+}
+.bg-red-color {
+    background-color: var(--clr-red);
+  }
+.bg-green-color {
+    background-color: var(--clr-green);
+}
+
+.bg-blue-color {
+    background-color: var(--clr-blue);
+}
+
+.bg-yellow-color {
+    background-color: var(--clr-yellow);
+}
+
+.bg-orange-color {
+    background-color: var(--clr-orange);
+}
+
+.bg-purple-color {
+    background-color: var(--clr-purple);
+} 
+
+.bg-pink-color {
+    background-color: var(--clr-pink);
 }

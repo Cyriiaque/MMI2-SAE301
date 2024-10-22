@@ -1,7 +1,7 @@
-<h1 class="text-black-color font-semibold text-2xl py-4 pl-3.5">Panier</h1>
+<h1 class="text-black-color font-semibold text-2xl py-4 pl-32 md:pl-64">Panier</h1>
 <div class="flex flex-col md:flex-row md:justify-around md:items-start justify-center items-center">
     <section id="panier" class="border-solid border-2 border-light-grey-color m-2 p-2 flex flex-col gap-4 max-w-4xl"></section>
-    <div class="max-w-60 bg-light-grey-color py-4 px-4 flex flex-col gap-4 m-2">
+    <div class="md:max-w-60 w-3/5 bg-light-grey-color py-6 px-10 flex flex-col gap-4 m-2">
         <h2 class="text-2xl font-semibold">Récapitulatif</h2>
         <h3>As-tu un code promo</h3>
         <input type="text" class="bg-light-grey-color border-solid border-grey-color border-2 py-2 px-2 rounded-lg" placeholder="Saisie ton code promo">

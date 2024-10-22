@@ -10,7 +10,7 @@
         </div>
         <button class="bg-black-color text-white-color rounded-full py-2 px-6">Se connecter</button>
         <div class="text-center">
-            <p class="text-gray-500">Don't have an account? <a href="#" onclick="loadSignTemplate()" class="text-black-color hover:text-grey-color">Sign up</a></p>
+            <p class="text-gray-500">Don't have an account? <a href="#" id="sign" class="text-black-color hover:text-grey-color">Sign up</a></p>
         </div>
     </div>
 </div>

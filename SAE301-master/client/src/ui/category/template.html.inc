@@ -1,1 +1,1 @@
-<a href="#" class="block py-2 px-3 text-black-color rounded hover:bg-light-grey-color hover:text-white-color md:hover:text-grey-color md:hover:bg-transparent md:border-0 md:p-0">{{type}}</a>
+<a href="#" class="block py-2 px-3 text-black-color rounded hover:bg-light-grey-color hover:text-white-color md:hover:text-grey-color md:hover:bg-transparent md:border-0 md:p-0 data-id="{{type}}">{{type}}</a>

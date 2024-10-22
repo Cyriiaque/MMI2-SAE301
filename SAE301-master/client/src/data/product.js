@@ -6,25 +6,25 @@ let fakeProducts = [
   {
     id: 1,
     name: "Pain",
-    category: 2,
+    id_products: 2,
     image:"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d56ebd9e-15f9-4aa3-9e52-c23f5b5c5930/M+NK+DF+STRK+TOP+SS.png"
   },
   {
     id: 2,
     name: "Lait",
-    category: 1,
+    id_products: 1,
     image:"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d56ebd9e-15f9-4aa3-9e52-c23f5b5c5930/M+NK+DF+STRK+TOP+SS.png"
   },
   {
     id: 3,
     name: "Beurre",
-    category: 1,
+    id_products: 1,
     image:"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d56ebd9e-15f9-4aa3-9e52-c23f5b5c5930/M+NK+DF+STRK+TOP+SS.png"
   },
   {
     id: 4,
     name: "Farine",
-    category: 2,
+    id_products: 2,
     image:"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d56ebd9e-15f9-4aa3-9e52-c23f5b5c5930/M+NK+DF+STRK+TOP+SS.png"
   },
 ];

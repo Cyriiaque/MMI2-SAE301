@@ -14,7 +14,7 @@
         </div>
         <button class="bg-black-color w-36 text-white-color rounded-full py-2 px-6">S'inscrire</button>
         <div class="text-center">
-            <p class="text-gray-500">Already have an account? <a href="#" onclick="loadLoginTemplate()" class="text-black-color hover:text-grey-color">Login</a></p>
+            <p class="text-gray-500">Already have an account? <a href="#" id="login1" class="text-black-color hover:text-grey-color"">Login</a></p>
         </div>
     </div>
 </div>

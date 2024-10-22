@@ -5,12 +5,13 @@ let PanierData = {};
 let fakePanier = [
   {
     id: 1,
-    subtitle: "Tshirt",
+    subtitle: "dfhhdfhfdshjsfkdjdfsjhdfjdfsjhhfdjfhsdjfhsdjfhdsjfhsdfjsdhfjdsh",
     price: 20,
     image:"https://www.footcenter.fr/media/catalog/product/cache/82d5e29288185f6fc64d760e116074a6/m/a/maillot-france-domicile-2024-2025-0.jpg",
     name: "maillot pas bo",
     color: "black",   
     shoesize: "M",
+    size: "",
   },
   {
     id: 2,
@@ -19,12 +20,13 @@ let fakePanier = [
     image:"https://www.footcenter.fr/media/catalog/product/cache/82d5e29288185f6fc64d760e116074a6/m/a/maillot-france-domicile-2024-2025-0.jpg",
     name: "maillot pas bo",
     color: "black",   
-    size: "M",
+    size: "42",
+    shoesize: "",
   }
 ];
 
 PanierData.fetch = async function (id) {
-  let data = await getRequest("products/" + id);
+  let data = await getRequest("cart/" + id);
   
   if (data[id].size == undefined) {
     data.size = "";
@@ -36,7 +38,7 @@ PanierData.fetch = async function (id) {
 };
 
 PanierData.fetchAll = async function () {
-  let data = await getRequest("products");
+  let data = await getRequest("cart/1");
   
   data.forEach(element => {
     if (element.size == undefined) {

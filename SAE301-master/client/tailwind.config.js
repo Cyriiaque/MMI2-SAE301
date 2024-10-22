@@ -15,6 +15,14 @@ export default {
         'black-color': 'var(--clr-black)',
         'grey-color': 'var(--clr-grey)',
         'light-grey-color': 'var(--clr-light-grey)',
+        'red-color': 'var(--clr-red)',
+        'green-color': 'var(--clr-green)',
+        'blue-color': 'var(--clr-blue)',
+        'yellow-color': 'var(--clr-yellow)',
+        'orange-color': 'var(--clr-orange)',
+        'purple-color': 'var(--clr-purple)',
+        'pink-color': 'var(--clr-pink)',
+        
       },
       boxShadow: {
         'customMobile': '1px -89px 70px -23px rgba(0,0,0,0.75) inset;',

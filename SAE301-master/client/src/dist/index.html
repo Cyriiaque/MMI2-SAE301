@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./output.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="flex flex-row">
+        <h1>Produit:</h1>
+        <h2>{{type}}</h2>
+    </div>
+    <div class="flex md:flex-row flex-col">
+        <div class="flex flex-col max-w-44 gap-4">
+            <select name="sexe" id="sexe">
+                <option value="" disabled selected>Choisissez le sexe</option>
+                <option value="homme">Homme</option>
+                <option value="femme">Femme</option>
+            </select>
+            <select name="color" id="color">
+                <option value="" disabled selected>Choisissez la couleur</option>
+                <option value="rouge">Rouge</option>
+                <option value="bleu">Bleu</option>
+                <option value="vert">Vert</option>
+                <option value="jaune">Jaune</option>
+            </select>
+            <select name="size" id="size">
+                <option value="" disabled selected>Choisissez la taille</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xl">XXXL (Pour Monsieur Poulbière)</option>
+            </select>
+        </div>
+        <div class="flex flex-row flex-wrap">
+            <div class="flex flex-col static">
+                <div class="relative">
+                    <img class="w-60 h-60 object-cover" src="{{image}}" alt="Chaussure" >
+                    <h3 class="block py-2 px-3 text-black-color bg-white-color absolute bottom-4 left-4 rounded">{{promo}}%</h3>
+                </div>
+                <h3 class="block py-2 px-3 font-medium text-black-color rounded">
+                    {{name}}
+                </h3>
+                <h3 class="block py-2 px-3 font-medium text-grey-color rounded">
+                    {{subtitle}}
+                </h3>
+                <div class="flex justify-start items-center">
+                    <div class="h-4 w-4 rounded-full"></div>
+                    <div class="h-4 w-4 rounded-full"></div>
+                    <div class="h-4 w-4 rounded-full"></div>
+                </div>
+                <h1 class="font-semibold">{{price}}€</h1>
+            </div>
+            <div class="flex flex-col static">
+                <div class="relative">
+                    <img class="w-60 h-60 object-cover" src="{{image}}" alt="Chaussure" >
+                    <h3 class="block py-2 px-3 text-black-color bg-white-color absolute bottom-4 left-4 rounded">{{promo}}%</h3>
+                </div>
+                <h3 class="block py-2 px-3 font-medium text-black-color rounded">
+                    {{name}}
+                </h3>
+                <h3 class="block py-2 px-3 font-medium text-grey-color rounded">
+                    {{subtitle}}
+                </h3>
+                <div class="flex justify-start items-center">
+                    <div class="h-4 w-4 rounded-full"></div>
+                    <div class="h-4 w-4 rounded-full"></div>
+                    <div class="h-4 w-4 rounded-full"></div>
+                </div>
+                <h1 class="font-semibold">{{price}}€</h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
