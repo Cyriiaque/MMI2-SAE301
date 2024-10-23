@@ -8,8 +8,9 @@
         </h2>
         
         <h3 class="text-grey-color font-semibold text-sm">{{subtitle}}</h3>
-        <h2  class="text-black-color font-semibold text-xl ">{{price}} €
+        <h2  class="text-black-color font-semibold text-xl" id="price-value"><span id="price-value">{{price}}</span>€
         </h2>
+        <h2 class="hidden" id="promo"><span id="promo-value">{{promo}}</span>€</h2>
         <section class="gap-2 flex flex-row" id="color"></section>
         <div class="flex justify-center items-center flex-col gap-2">
             <h3 class="text-black-color font-semibold">Sélectionner la taille
@@ -21,7 +22,7 @@
             <h3 class="text-black-color font-medium flex gap-2 justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none"><path stroke="currentColor" stroke-width="1.5" d="M21.75 10.5v6.75a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V10.5m3.308-2.25h12.885"/><path stroke="currentColor" stroke-width="1.5" d="M15.79 5.599l2.652 2.65-2.652 2.653M8.21 5.599l-2.652 2.65 2.652 2.653M17.25 19v-2.5M12 19v-2.5M6.75 19v-2.5"/>
             </svg>Guide des tailles
             </h3>
-            <button class="bg-black-color text-white-color font-medium py-3 px-8 rounded-full text-xl">Ajouter au panier
+            <button class="bg-black-color text-white-color font-medium py-3 px-8 rounded-full text-xl" id="addToCart">Ajouter au panier
             </button>
         </div>
         <h3 class="text-black-color font-semibold text-sm">Retrait gratuit

@@ -1,4 +1,4 @@
-<article class="border-solid border-2 border-light-grey-color m-2 p-2 flex sm:flex-row flex-col gap-4 max-w-4xl">
+<article class="border-solid border-2 border-light-grey-color m-2 p-2 flex sm:flex-row flex-col gap-4 max-w-4xl" data-id="{{id_product}}">
     <img src="{{image}}" alt="image produit" class="w-auto h-80 sm:w-60 sm:h-60 object-cover">
     <div class="flex flex-col gap-2 w-full" id="promotion">
         <div class="text-black-color font-semibold text-lg flex justify-between gap-2">

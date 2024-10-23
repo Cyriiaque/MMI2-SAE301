@@ -112,7 +112,7 @@ C.loadPanierTemplate= async function () {
     let promo = document.querySelector("#promo");
     let quantity = promoElement.querySelector("#quantity");
     let code = document.querySelector("#code-value");
-    let totalPromo = document.querySelector("#totalPromo");
+    C.updateTotal();
     let totalCount = document.querySelector("#total");
     let priceValueElement = promoElement.querySelector("#price-value");
     console.log(promoValueElement);
@@ -137,7 +137,7 @@ C.loadPanierTemplate= async function () {
     }
     totalCount.textContent = total.toFixed(2);
     if (codeValue != 0){
-      let prixtotal = (total - codeValue);
+      let prixtotal = total - (total * codeValue / 100);
       totalPromo.textContent = prixtotal.toFixed(2);
     }
     else{
@@ -147,9 +147,102 @@ C.loadPanierTemplate= async function () {
     console.error("Promo or Price element not found within promoElement.");
     }
   });
+document.querySelectorAll("#quantityplus").forEach(element => {
+  element.addEventListener("click", C.addQuantity);
+});
+
+document.querySelectorAll("#quantitymoins").forEach(element => {
+  element.addEventListener("click", C.lessQuantity);
+});
+
   
 }
 document.querySelector("#cart").addEventListener("click", C.loadPanierTemplate);
+
+C.addQuantity = function(ev){
+  let quantityContainer = ev.target.closest("div");
+  let quantity = quantityContainer.querySelector("#quantity");
+  let quantityValue = parseFloat(quantity.textContent);
+  quantityValue += 1;
+  quantity.textContent = quantityValue;
+  if (quantityValue > 1){
+    quantityContainer.querySelector("#quantitymoins").classList.remove("hidden");
+  }
+  C.updateTotal();
+}
+
+C.lessQuantity = function(ev){
+  let quantityContainer = ev.target.closest("div");
+  let quantity = quantityContainer.querySelector("#quantity");
+  let hide = quantityContainer.querySelector("#quantitymoins");
+  let quantityValue = parseFloat(quantity.textContent);
+  if (quantityValue > 1){
+    quantityValue -= 1;
+    quantity.textContent = quantityValue;
+  }
+  else{
+    hide.classList.add("hidden");
+  }
+  C.updateTotal();
+}
+
+C.updateTotal = function() {
+  let promoElements = document.querySelectorAll("#promotion");
+  let total = 0;
+  promoElements.forEach(promoElement => {
+    let quantity = promoElement.querySelector("#quantity");
+    let code = document.querySelector("#code-value");
+    let totalPromo = document.querySelector("#totalPromo");
+    let totalCount = document.querySelector("#total");
+    let priceValueElement = promoElement.querySelector("#price-value");
+    let priceValue = parseFloat(priceValueElement.textContent);
+    let codeValue = parseFloat(code.textContent);
+    let quantityValue = parseFloat(quantity.textContent);
+
+    let maxQuantity = 0;
+    let maxQuantityProduct = null;
+
+    promoElements.forEach(promoElement => {
+      let quantity = promoElement.querySelector("#quantity");
+      let quantityValue = parseFloat(quantity.textContent);
+
+      if (quantityValue > maxQuantity) {
+      maxQuantity = quantityValue;
+      maxQuantityProduct = promoElement;
+      }
+    });
+
+    promoElements.forEach(promoElement => {
+      let priceValueElement = promoElement.querySelector("#price-value");
+      if (priceValueElement) {
+      let originalPrice = parseFloat(priceValueElement.dataset.originalPrice || priceValueElement.textContent);
+      if (promoElement === maxQuantityProduct) {
+        let discountedPrice = originalPrice * 0.8; // Apply 20% discount
+        priceValueElement.textContent = discountedPrice.toFixed(2);
+      } else {
+        priceValueElement.textContent = originalPrice.toFixed(2); // Reset to original price
+      }
+      priceValueElement.dataset.originalPrice = originalPrice; // Store the original price
+      }
+    });
+
+    if (priceValueElement) {
+      let prixtotal = priceValue; 
+      total += priceValue * quantityValue;
+      priceValueElement.textContent = prixtotal.toFixed(2);
+      totalCount.textContent = total.toFixed(2);
+      if (codeValue != 0){
+        let prixtotal = total - (total * codeValue / 100);
+        totalPromo.textContent = prixtotal.toFixed(2);
+      }
+      else{
+        totalPromo.textContent = total;
+      }
+    } else {
+      console.error("Promo or Price element not found within promoElement.");
+    }
+  });
+}
 
 
 
@@ -228,6 +321,17 @@ C.loadCardTemplate = async function (ev) {
     let htmlColor = ColorView.render(dataColor);   
     console.log(htmlColor);
     console.log(ColorElement);
+    let promoValueElement = document.querySelector("#promo-value");
+    let priceValueElement = document.querySelector("#price-value");
+    let promoValue = parseFloat(promoValueElement.textContent);
+    let priceValue = parseFloat(priceValueElement.textContent);
+    console.log(promoValue);
+    console.log(priceValue);
+
+    if (promoValue > 0) {
+      let discountedPrice = priceValue - (priceValue * promoValue / 100);
+      priceValueElement.textContent = discountedPrice.toFixed(2);
+    }
 
     if (ColorElement) {
       ColorElement.innerHTML = htmlColor;
@@ -257,9 +361,79 @@ C.loadCardTemplate = async function (ev) {
         }
       });
     }
+    let selectedColorValue = getSelectedColor();
+    console.log("Default selected color:", selectedColorValue);
 
-  }
+    let defaultSelectedSize = getSelectedSize();
+    console.log("Default selected size:", defaultSelectedSize);
+
+    let value = document.querySelector("#sizes");
+    value.addEventListener("change", getSelectedSize);
+
+    let colorsValue = document.querySelectorAll("#color div");
+    colorsValue.forEach(colorElement => {
+      colorElement.addEventListener("click", (ev) => {
+        selectedColorValue = getSelectedColor(ev);
+      });
+    });
+    function addtocart() {
+      const selectedSize = getSelectedSize();
+      console.log(selectedSize, selectedColorValue);
+
+      const mainElement = document.querySelector("#main div");
+      if (mainElement) {
+        const dataset = mainElement.dataset.id;
+        console.log("Dataset of the first div in #main:", dataset);
+        console.log(dataset);
+      } else {
+        console.error("No div found within #main.");
+      }
+    }
   
+    let buttonAdd = document.querySelector("#addToCart");
+    buttonAdd.addEventListener("click", addtocart);
+}
+    function getSelectedColor(ev) {
+      let selectedColor = null;
+      if (ev) {
+        const colorElement = ev.target.closest('div');
+        if (colorElement) {
+          const colorClass = Array.from(colorElement.classList).find(cls => cls.startsWith('bg-') && cls.endsWith('-color'));
+          if (colorClass) {
+            selectedColor = colorClass.split('-')[1];
+            console.log(`Selected color: ${selectedColor}`);
+            return selectedColor;
+          } else {
+            console.log(`Element with class 'bg-${selectedColor}-color' not found.`);
+          }
+        }
+      }
+      const firstColorElement = document.querySelector("#color div");
+      if (firstColorElement) {
+        const colorClass = Array.from(firstColorElement.classList).find(cls => cls.startsWith('bg-') && cls.endsWith('-color'));
+        if (colorClass) {
+          selectedColor = colorClass.split('-')[1];
+          console.log(`Selected color: ${selectedColor}`);
+          return selectedColor;
+        } else {
+          console.log("No color class found on the first color element.");
+        }
+      } else {
+        console.log("No color elements found.");
+      }
+      return selectedColor;
+    }
+
+    function getSelectedSize() {
+      const selectElement = document.getElementById('sizes');
+      const selectedSize = selectElement.value;
+      console.log(selectedSize);
+      return selectedSize;
+    }
+  
+
+
+
 // C.loadPrice = function(){
 //   let promotionElements = document.querySelectorAll("#promotion");
 //   promotionElements.forEach(promotionElement => {

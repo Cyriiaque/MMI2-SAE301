@@ -11,7 +11,7 @@
         </div>
         <div class="flex flex-row justify-between items-center text-grey-color border-solid border-grey-color border-b-2 py-2">
             <h3>Code promo</h3>
-            <h3 id="codepromo">-<span id="code-value">4.99</span>€</h3>
+            <h3 id="codepromo">-<span id="code-value">10</span>%</h3>
         </div>
         <div class="flex flex-row justify-between items-center text-black-color border-solid border-black-color border-b-2 py-2 pt-10">
             <h3>Total Panier</h3>
