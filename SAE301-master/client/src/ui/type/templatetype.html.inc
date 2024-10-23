@@ -22,7 +22,6 @@
                 <option value="m">M</option>
                 <option value="l">L</option>
                 <option value="xl">XL</option>
-                <option value="xl">XXXL (Pour Monsieur Poulbière)</option>
             </select>
         </div>
         <section class="sm:flex-row static grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 content-center" id="type">

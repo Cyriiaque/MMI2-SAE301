@@ -30,7 +30,7 @@
 }
 .bg-red-color {
     background-color: var(--clr-red);
-  }
+}
 .bg-green-color {
     background-color: var(--clr-green);
 }
@@ -53,4 +53,32 @@
 
 .bg-pink-color {
     background-color: var(--clr-pink);
+}
+
+.text-red-color {
+    color: var(--clr-red);
+}
+
+.text-green-color {
+    color: var(--clr-green);
+}
+
+.text-blue-color {
+    color: var(--clr-blue);
+}
+
+.text-yellow-color {
+    color: var(--clr-yellow);
+}
+
+.text-orange-color {
+    color: var(--clr-orange);
+}
+
+.text-purple-color {
+    color: var(--clr-purple);
+}
+
+.text-pink-color {
+    color: var(--clr-pink);
 }

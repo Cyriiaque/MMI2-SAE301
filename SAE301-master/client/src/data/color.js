@@ -5,26 +5,29 @@ let ColorData = {};
 let fakeColor = [
   {
     id: 1,
-    color: "red",
+    colors: "red",
   },
   {
     id: 2,
-    color: "blue",
+    colors: "blue",
   },
   {
     id: 3,
-    color: "green",
+    colors: "green",
   },
 ];
 
 ColorData.fetch = async function (id) {
   let data = await getRequest("products/" + id);
-  return data == false ? fakeColor.pop() : [data];
+  console.log(data[1]);
+  return [data[1]];
 };
 
-ColorData.fetchAll = async function () {
-  let data = await getRequest("products");
-  return data == false ? fakeColor : data;
+ColorData.fetchAll = async function (id) {
+  let data = await getRequest("products/"+id);
+  console.log(data[1]);
+  return data[1];
+  
 };
 
 export { ColorData };

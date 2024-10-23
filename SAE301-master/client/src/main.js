@@ -12,8 +12,13 @@ import { TypeCardView } from "./ui/cardType/index.js";
 import { CardData } from "./data/card.js";
 import { CardView } from "./ui/card/index.js";
 
-// import { ColorData } from "./data/color.js";
-// import { ColorView } from "./ui/color/index.js";
+import { ColorData } from "./data/color.js";
+import { ColorView } from "./ui/color/index.js";
+
+import { SizeData } from "./data/size.js";
+import { SizeView } from "./ui/size/index.js";
+
+
 let C = {};
 
 C.loadAccueilTemplate = async function () {
@@ -91,6 +96,7 @@ C.loadPanierTemplate= async function () {
     console.error("Error loading Panier template:", error);
   }
   let dataCart = await PanierData.fetchAll();
+  console.log(dataCart);
   let htmlCart = PanierView.render(dataCart);
   const cartElement = document.querySelector("#panier");
   if (cartElement) {
@@ -98,14 +104,50 @@ C.loadPanierTemplate= async function () {
   } else {
     console.error("Element with ID 'cart' not found.");
   }
-  // let dataColor = await ColorData.fetchAll();
-  // let htmlColor = ColorView.render(dataColor);
-  // const ColorElement = document.querySelector("#color");
-  // if (ColorElement) {
-  //   ColorElement.innerHTML = htmlColor;
-  // } else {
-  //   console.error("Element with ID 'Color' not found.");
-  // }
+  let promoElements = document.querySelectorAll("#promotion");
+  let total = 0;
+  promoElements.forEach(promoElement => {
+    
+    let promoValueElement = promoElement.querySelector("#promo-value");
+    let promo = document.querySelector("#promo");
+    let quantity = promoElement.querySelector("#quantity");
+    let code = document.querySelector("#code-value");
+    let totalPromo = document.querySelector("#totalPromo");
+    let totalCount = document.querySelector("#total");
+    let priceValueElement = promoElement.querySelector("#price-value");
+    console.log(promoValueElement);
+    console.log(priceValueElement);
+    if (promoValueElement && priceValueElement) {
+    let promoValue = parseFloat(promoValueElement.textContent);
+    let priceValue = parseFloat(priceValueElement.textContent);
+    let codeValue = parseFloat(code.textContent);
+    let quantityValue = parseFloat(quantity.textContent);
+    console.log(quantityValue);
+
+    if (promoValue === 0) {
+      promo.style.display = "none";
+      total += priceValue* quantityValue;
+      console.log(total);
+    } else {
+      let prixtotal = priceValue - ((priceValue * promoValue) / 100);
+      total += (prixtotal* quantityValue);
+      console.log(total);
+      priceValueElement.textContent = prixtotal.toFixed(2);
+      priceValueElement.style.textDecoration = "underline";
+    }
+    totalCount.textContent = total.toFixed(2);
+    if (codeValue != 0){
+      let prixtotal = (total - codeValue);
+      totalPromo.textContent = prixtotal.toFixed(2);
+    }
+    else{
+      totalPromo.textContent = total;
+    }
+    } else {
+    console.error("Promo or Price element not found within promoElement.");
+    }
+  });
+  
 }
 document.querySelector("#cart").addEventListener("click", C.loadPanierTemplate);
 
@@ -137,14 +179,28 @@ C.loadTypeTemplate = async function (ev) {
     } else {
       console.error("Element with ID 'type' not found.");
     }
-
-    let promoElements = document.querySelectorAll("#promo");
-
+    let promoElements = document.querySelectorAll("#promotion");
     promoElements.forEach(promoElement => {
-      let promoValue = promoElement.querySelector("#promo-value").textContent;
-      console.log(promoValue);
-      if (promoValue == 0) {
-        promoElement.style.display = "none";
+      let promoValueElement = promoElement.querySelector("#promo-value");
+      let promo = document.querySelector("#promo");
+      let priceValueElement = promoElement.querySelector("#price-value");
+      let newprice = promoElement.querySelector("#newprice");
+      console.log(promoValueElement);
+      console.log(priceValueElement);
+
+      if (promoValueElement && priceValueElement) {
+      let promoValue = parseFloat(promoValueElement.textContent);
+      let priceValue = parseFloat(priceValueElement.textContent);
+
+      if (promoValue === 0) {
+        promo.style.display = "none";
+      } else {
+        let prixtotal = priceValue - (priceValue * promoValue) / 100;
+        newprice.textContent = prixtotal.toFixed(2) + "€";
+        priceValueElement.style.textDecoration = "line-through";
+      }
+      } else {
+      console.error("Promo or Price element not found within promoElement.");
       }
     });
   } else {
@@ -162,12 +218,63 @@ C.loadCardTemplate = async function (ev) {
   if (article) {
     let id = article.dataset.id;
     console.log(article.dataset.id);
-      let datacard = await CardData.fetch(id);
-      let html = CardView.render(datacard);
-      document.querySelector("#main").innerHTML = html;
-  }
-}
+    let datacard = await CardData.fetch(id);
+    let html = CardView.render(datacard);
+    document.querySelector("#main").innerHTML = html;
 
+    let dataColor = await ColorData.fetchAll(id);
+    console.log(dataColor);
+    let ColorElement = document.querySelector("#color");
+    let htmlColor = ColorView.render(dataColor);   
+    console.log(htmlColor);
+    console.log(ColorElement);
+
+    if (ColorElement) {
+      ColorElement.innerHTML = htmlColor;
+      let colorItems = ColorElement.querySelectorAll("div");
+      colorItems.forEach((item, index) => {
+      if (index < dataColor.length) {
+        let color = dataColor[index];
+        let classes = item.className.split(" ");
+        let newClasses = classes.filter(cls => !cls.includes(`bg-`));
+        newClasses.push(`bg-${color}-color`);
+        item.className = newClasses.join(" ");
+      }
+      });
+    }
+    let dataSize = await SizeData.fetch(id);
+    console.log(dataSize);
+    let SizeElement = document.querySelector("#sizes");
+    let htmlSizes = dataSize.map(size => SizeView.render(size)).join('');   
+    console.log(htmlSizes);
+    if (SizeElement) {
+      SizeElement.innerHTML = htmlSizes;
+    }
+    let SizeNotNull = document.querySelectorAll("option");
+      SizeNotNull.forEach(sizeElement => {
+        if (sizeElement.textContent.trim() === "null") {
+          sizeElement.remove();
+        }
+      });
+    }
+
+  }
+  
+// C.loadPrice = function(){
+//   let promotionElements = document.querySelectorAll("#promotion");
+//   promotionElements.forEach(promotionElement => {
+//     let promoValue = parseFloat(promotionElement.querySelector("#promo-value").textContent);
+//     console.log(promoValue);
+//     let priceValue = parseFloat(promotionElement.querySelector("#price-value").textContent);
+//     console.log(priceValue);
+//     if (promoValue == 0) {
+//       promotionElement.style.display = "none";
+//     } else {
+//       let prixtotal = priceValue - (priceValue * promoValue) / 100;
+//       promotionElement.querySelector("#price-value").textContent = prixtotal.toFixed(2);
+//     }
+//   });
+// }
 
 C.init = async function () {
   C.loadAccueilTemplate();

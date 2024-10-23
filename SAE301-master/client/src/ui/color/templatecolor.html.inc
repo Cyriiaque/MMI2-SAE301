@@ -1,1 +1,1 @@
-<div class="h-4 w-4 rounded-full bg-{{color}}-color"></div>
+<div class="h-4 w-4 rounded-full border-solid border-black-color border-2" id="colors"></div>

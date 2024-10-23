@@ -7,15 +7,15 @@
         <input type="text" class="bg-light-grey-color border-solid border-grey-color border-2 py-2 px-2 rounded-lg" placeholder="Saisie ton code promo">
         <div class="flex flex-row justify-between items-center text-grey-color border-solid border-grey-color border-b-2 py-2">
             <h3>Total Panier</h3>
-            <h3>20,00€</h3>
+            <h3 id="total"></h3>
         </div>
         <div class="flex flex-row justify-between items-center text-grey-color border-solid border-grey-color border-b-2 py-2">
             <h3>Code promo</h3>
-            <h3>-4,99€</h3>
+            <h3 id="codepromo">-<span id="code-value">4.99</span>€</h3>
         </div>
         <div class="flex flex-row justify-between items-center text-black-color border-solid border-black-color border-b-2 py-2 pt-10">
             <h3>Total Panier</h3>
-            <h3>44,99€</h3>
+            <h3 id="totalPromo"></h3>
         </div>
         <button class="bg-black-color text-white-color rounded-full py-3 px-6">Paiement</button>
     </div>
