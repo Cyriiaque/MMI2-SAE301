@@ -49,40 +49,40 @@ let accueil = document.querySelector("#accueil");
 accueil.addEventListener("click", C.loadAccueilTemplate);
 
 
-C.loadLoginTemplate= async function () {
-  try {
-    const response = await fetch("./src/ui/login/templatelogin.html.inc");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const template = await response.text();
-    document.querySelector("#main").innerHTML = template;
-  } catch (error) {
-    console.error("Error loading Login template:", error);
-  }
-  let sign = document.querySelector("#sign");
-  sign.addEventListener("click", C.loadSignTemplate);
-}
+// C.loadLoginTemplate= async function () {
+//   try {
+//     const response = await fetch("./src/ui/login/templatelogin.html.inc");
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const template = await response.text();
+//     document.querySelector("#main").innerHTML = template;
+//   } catch (error) {
+//     console.error("Error loading Login template:", error);
+//   }
+//   let sign = document.querySelector("#sign");
+//   sign.addEventListener("click", C.loadSignTemplate);
+// }
 
 
 
-C.loadSignTemplate= async function () {
-  try {
-    const response = await fetch("./src/ui/sign/templatesign.html.inc");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const template = await response.text();
-    document.querySelector("#main").innerHTML = template;
-  } catch (error) {
-    console.error("Error loading Sign template:", error);
-  }
-  let login1 =document.querySelector("#login1");
-  console.log(login1);
-  login1.addEventListener("click", C.loadLoginTemplate);
-}
-let login =document.querySelector("#login");
-login.addEventListener("click", C.loadLoginTemplate);
+// C.loadSignTemplate= async function () {
+//   try {
+//     const response = await fetch("./src/ui/sign/templatesign.html.inc");
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const template = await response.text();
+//     document.querySelector("#main").innerHTML = template;
+//   } catch (error) {
+//     console.error("Error loading Sign template:", error);
+//   }
+//   let login1 =document.querySelector("#login1");
+//   console.log(login1);
+//   login1.addEventListener("click", C.loadLoginTemplate);
+// }
+// let login =document.querySelector("#login");
+// login.addEventListener("click", C.loadLoginTemplate);
 
 C.loadPanierTemplate= async function () {
   try {
@@ -162,11 +162,16 @@ document.querySelector("#cart").addEventListener("click", C.loadPanierTemplate);
 C.addQuantity = function(ev){
   let quantityContainer = ev.target.closest("div");
   let quantity = quantityContainer.querySelector("#quantity");
+  let stock = document.querySelector("#stock");
+  console.log(stock);
   let quantityValue = parseFloat(quantity.textContent);
   quantityValue += 1;
   quantity.textContent = quantityValue;
   if (quantityValue > 1){
     quantityContainer.querySelector("#quantitymoins").classList.remove("hidden");
+  }
+  else if (quantityValue == stock.textContent){
+    quantityContainer.querySelector("#quantityplus").classList.add("hidden");
   }
   C.updateTotal();
 }
@@ -220,7 +225,6 @@ C.updateTotal = function() {
       if (promoElement === maxQuantityProduct) {
         let discountedPrice = originalPrice * 0.8; // Apply 20% discount 
         priceValueElement.textContent = discountedPrice.toFixed(2);
-        console.log(labelPromoElement);
         if (labelPromoElement) {
             labelPromoElement.classList.remove("hidden");
         }
@@ -353,10 +357,8 @@ C.loadCardTemplate = async function (ev) {
       });
     }
     let dataSize = await SizeData.fetch(id);
-    console.log(dataSize);
     let SizeElement = document.querySelector("#sizes");
     let htmlSizes = dataSize.map(size => SizeView.render(size)).join('');   
-    console.log(htmlSizes);
     if (SizeElement) {
       SizeElement.innerHTML = htmlSizes;
     }
@@ -380,80 +382,114 @@ C.loadCardTemplate = async function (ev) {
     colorsValue.forEach(colorElement => {
       colorElement.addEventListener("click", (ev) => {
         selectedColorValue = getSelectedColor(ev);
+        console.log("Selected color:", selectedColorValue);
       });
     });
-    function addtocart() {
-      const selectedSize = getSelectedSize();
-      console.log(selectedSize, selectedColorValue);
-
-      const mainElement = document.querySelector("#main div");
-      if (mainElement) {
-        const dataset = mainElement.dataset.id;
-        console.log(dataset);
-      } else {
-        console.error("No div found within #main.");
-      }
-    }
-  
+    addtocart(); 
     let buttonAdd = document.querySelector("#addToCart");
     buttonAdd.addEventListener("click", addtocart);
+
+    let submit_addcart = document.querySelector("#addcart");
+    submit_addcart.addEventListener("click", C.handler_addcart);
 }
-    function getSelectedColor(ev) {
-      let selectedColor = null;
-      if (ev) {
-        const colorElement = ev.target.closest('div');
-        if (colorElement) {
-          const colorClass = Array.from(colorElement.classList).find(cls => cls.startsWith('bg-') && cls.endsWith('-color'));
-          if (colorClass) {
-            selectedColor = colorClass.split('-')[1];
-            console.log(`Selected color: ${selectedColor}`);
-            return selectedColor;
-          } else {
-            console.log(`Element with class 'bg-${selectedColor}-color' not found.`);
-          }
-        }
-      }
-      const firstColorElement = document.querySelector("#color div");
-      if (firstColorElement) {
-        const colorClass = Array.from(firstColorElement.classList).find(cls => cls.startsWith('bg-') && cls.endsWith('-color'));
-        if (colorClass) {
-          selectedColor = colorClass.split('-')[1];
-          console.log(`Selected color: ${selectedColor}`);
-          return selectedColor;
-        } else {
-          console.log("No color class found on the first color element.");
-        }
-      } else {
-        console.log("No color elements found.");
-      }
-      return selectedColor;
+let orderCount = 1;
+  async function addtocart() {
+    const selectedSize = getSelectedSize();
+    const selectedColorValue = getSelectedColor();
+    const mainElement = document.querySelector("#main div");
+    if (mainElement) {
+    let nameClass = document.querySelector("#className");
+    let nameClassValue = nameClass.textContent;
+
+    const name = mainElement.dataset.id;
+    console.log(name);
+    let color = selectedColorValue;
+    let size = selectedSize;
+    let shoesize =selectedSize;
+    if (nameClassValue == "Tshirt" || nameClassValue == "Short"){
+      shoesize = "null";
+    } else {
+      size = "null";
+    }
+    let tableaux = JSON.stringify({name,color, size,shoesize});
+    console.log(tableaux);
+    let tableau = encodeURI(tableaux);
+    console.log(tableau);
+    let responseTab = await fetch(`../api/products/` + tableau);
+    let responseData = await responseTab.json();
+    console.log(responseData);
+
+    let id_product = document.querySelector("input[name='id_product']");
+    if (id_product) {
+      id_product.value = responseData.id_product;
+    } else {
+      console.error("Input element with name 'id_product' not found.");
+    }
+    console.log(orderCount);
+    let orderCountInput = document.querySelector("input[name='id_order']");
+    if (orderCountInput) {
+      orderCountInput.value = orderCount;
+    } else {
+      console.error("Input element with name 'orderCount' not found.");
     }
 
-    function getSelectedSize() {
-      const selectElement = document.getElementById('sizes');
-      const selectedSize = selectElement.value;
-      console.log(selectedSize);
-      return selectedSize;
+    console.log(id_product);
+    return responseData;
+  }
+}
+function getSelectedColor(ev) {
+  let selectedColor = null;
+  if (ev) {
+    const colorElement = ev.target.closest('div');
+    if (colorElement) {
+      const colorClass = Array.from(colorElement.classList).find(cls => cls.startsWith('bg-') && cls.endsWith('-color'));
+      if (colorClass) {
+        selectedColor = colorClass.split('-')[1];
+
+        return selectedColor;
+      }
     }
-  
+  }
+    const firstColorElement = document.querySelector("#color div");
+    if (firstColorElement) {
+      const colorClass = Array.from(firstColorElement.classList).find(cls => cls.startsWith('bg-') && cls.endsWith('-color'));
+      if (colorClass) {
+        selectedColor = colorClass.split('-')[1];
+        return selectedColor;
+      }
+    }
+    return selectedColor;
+  }
+
+function getSelectedSize() {
+  const selectElement = document.getElementById('sizes');
+  const selectedSize = selectElement.value;
+  return selectedSize;
+}
+
+C.handler_addcart = async function (ev) {
+  ev.preventDefault();
+  let form = ev.target.form;
+  let formData = new FormData(form);
+  await PanierData.add(formData);
+};
+
+C.handler_delcart = async function (ev) {
+  ev.preventDefault();
+  let form = ev.target.form;
+  let formData = new FormData(form);
+  let urlEncoded = new URLSearchParams(formData).toString();
+  await PanierData.del(urlEncoded);
+};
+
+C.handler_adduser = async function (ev) {
+  ev.preventDefault();
+  let form = ev.target.form;
+  let formData = new FormData(form);
+  await UserData.add(formData);
+};
 
 
-
-// C.loadPrice = function(){
-//   let promotionElements = document.querySelectorAll("#promotion");
-//   promotionElements.forEach(promotionElement => {
-//     let promoValue = parseFloat(promotionElement.querySelector("#promo-value").textContent);
-//     console.log(promoValue);
-//     let priceValue = parseFloat(promotionElement.querySelector("#price-value").textContent);
-//     console.log(priceValue);
-//     if (promoValue == 0) {
-//       promotionElement.style.display = "none";
-//     } else {
-//       let prixtotal = priceValue - (priceValue * promoValue) / 100;
-//       promotionElement.querySelector("#price-value").textContent = prixtotal.toFixed(2);
-//     }
-//   });
-// }
 
 C.init = async function () {
   C.loadAccueilTemplate();

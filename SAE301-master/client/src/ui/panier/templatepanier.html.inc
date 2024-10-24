@@ -5,6 +5,7 @@
             <h2 class="text-sm md:text-xl">{{name}}</h2>
             <h2 class="text-sm md:text-xl" id="price"><span id="price-value">{{price}}</span>€</h2>
             <h2 class="hidden" id="promo"><span id="promo-value">{{promo}}</span>€</h2>
+            <h2 class="hidden" id="stock">{{stock}}</h2>
             <h2 id="labelPromo" class="hidden bg-black-color text-white-color px-2 py-1 rounded absolute -top-8 -right-8">-20%</h2>
         </div>
         

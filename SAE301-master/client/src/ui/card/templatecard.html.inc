@@ -4,6 +4,7 @@
     </div>
     
     <div class="flex flex-col gap-2 max-w-96">
+        <h2 id="className" class="hidden">{{type}}</h2>
         <h2  class="text-black-color font-semibold text-2xl ">{{name}}
         </h2>
         
@@ -22,8 +23,14 @@
             <h3 class="text-black-color font-medium flex gap-2 justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none"><path stroke="currentColor" stroke-width="1.5" d="M21.75 10.5v6.75a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V10.5m3.308-2.25h12.885"/><path stroke="currentColor" stroke-width="1.5" d="M15.79 5.599l2.652 2.65-2.652 2.653M8.21 5.599l-2.652 2.65 2.652 2.653M17.25 19v-2.5M12 19v-2.5M6.75 19v-2.5"/>
             </svg>Guide des tailles
             </h3>
-            <button class="bg-black-color text-white-color font-medium py-3 px-8 rounded-full text-xl" id="addToCart">Ajouter au panier
-            </button>
+            <form method='POST' action="../api/cart/add" id="addToCart" class="flex flex-col w-96 mt-12">
+                <input type="number" name="id_order" placeholder="Saisir le panier"
+                    class="h-8 mt-4 border border-black text-black">
+                <input type="number" name="id_product" placeholder="Saisir le produit"
+                    class="h-8 mt-4 border border-black text-black">
+                <button type="submit" name="action" id="addcart" class="h-8 bg-black-color text-white-color py-2 px-3 rounded-full flex justify-center items-center">
+                    Ajouter au panier</button>
+            </form>
         </div>
         <h3 class="text-black-color font-semibold text-sm">Retrait gratuit
         </h3>

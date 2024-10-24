@@ -1,4 +1,6 @@
 import { getRequest } from "../lib/api-request.js";
+import { postRequest } from "../lib/api-request.js";
+import { deleteRequest } from "../lib/api-request.js";
 
 let PanierData = {};
 
@@ -52,5 +54,13 @@ PanierData.fetchAll = async function () {
   return data == false ? fakePanier : data;
 
 };
+PanierData.add = async function (formdata) {
+  let data = await postRequest("cart/add", formdata);
+  return data;
+};
 
+PanierData.del = async function (formdata) {
+  let data = await deleteRequest("cart/del", formdata);
+  return data;
+};
 export { PanierData };
