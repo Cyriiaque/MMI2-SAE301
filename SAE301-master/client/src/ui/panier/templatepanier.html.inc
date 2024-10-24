@@ -1,10 +1,11 @@
 <article class="border-solid border-2 border-light-grey-color m-2 p-2 flex sm:flex-row flex-col gap-4 max-w-4xl" data-id="{{id_product}}">
     <img src="{{image}}" alt="image produit" class="w-auto h-80 sm:w-60 sm:h-60 object-cover">
     <div class="flex flex-col gap-2 w-full" id="promotion">
-        <div class="text-black-color font-semibold text-lg flex justify-between gap-2">
+        <div class="text-black-color font-semibold text-lg flex justify-between gap-2 relative">
             <h2 class="text-sm md:text-xl">{{name}}</h2>
             <h2 class="text-sm md:text-xl" id="price"><span id="price-value">{{price}}</span>€</h2>
             <h2 class="hidden" id="promo"><span id="promo-value">{{promo}}</span>€</h2>
+            <h2 id="labelPromo" class="hidden bg-black-color text-white-color px-2 py-1 rounded absolute -top-8 -right-8">-20%</h2>
         </div>
         
         <h3 class="text-grey-color font-semibold md:text-lg text-sm">{{subtitle}}</h3>

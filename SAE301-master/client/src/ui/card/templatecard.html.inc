@@ -1,4 +1,4 @@
-<div data-id="{{id_product}}" class="m-2 p-2 flex sm:flex-row flex-col gap-4 max-w-screen justify-center sm:items-start items-center">
+<div data-id="{{name}}" class="m-2 p-2 flex sm:flex-row flex-col gap-4 max-w-screen justify-center sm:items-start items-center">
     <div>
         <img src="{{image}}" alt="image produit" class="w-auto h-80 object-cover">
     </div>

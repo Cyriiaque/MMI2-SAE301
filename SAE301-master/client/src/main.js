@@ -214,15 +214,21 @@ C.updateTotal = function() {
 
     promoElements.forEach(promoElement => {
       let priceValueElement = promoElement.querySelector("#price-value");
+      let labelPromoElement = promoElement.querySelector("#labelPromo");
       if (priceValueElement) {
       let originalPrice = parseFloat(priceValueElement.dataset.originalPrice || priceValueElement.textContent);
       if (promoElement === maxQuantityProduct) {
-        let discountedPrice = originalPrice * 0.8; // Apply 20% discount
+        let discountedPrice = originalPrice * 0.8; // Apply 20% discount 
         priceValueElement.textContent = discountedPrice.toFixed(2);
+        console.log(labelPromoElement);
+        if (labelPromoElement) {
+            labelPromoElement.classList.remove("hidden");
+        }
       } else {
-        priceValueElement.textContent = originalPrice.toFixed(2); // Reset to original price
+        priceValueElement.textContent = originalPrice.toFixed(2); 
+        labelPromoElement.classList.add("hidden");
       }
-      priceValueElement.dataset.originalPrice = originalPrice; // Store the original price
+      priceValueElement.dataset.originalPrice = originalPrice; 
       }
     });
 
@@ -383,7 +389,6 @@ C.loadCardTemplate = async function (ev) {
       const mainElement = document.querySelector("#main div");
       if (mainElement) {
         const dataset = mainElement.dataset.id;
-        console.log("Dataset of the first div in #main:", dataset);
         console.log(dataset);
       } else {
         console.error("No div found within #main.");
