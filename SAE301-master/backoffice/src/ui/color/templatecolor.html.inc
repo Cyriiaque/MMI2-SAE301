@@ -1,1 +1,0 @@
-<div class="h-4 w-4 rounded-full bg-{{color}}-color"></div>
