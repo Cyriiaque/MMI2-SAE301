@@ -1,1 +1,0 @@
-<option id="size">{{size}}</option>
