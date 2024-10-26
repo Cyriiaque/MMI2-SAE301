@@ -1,0 +1,16 @@
+import { genericRenderer } from "../../lib/utils.js";
+
+const templateFile = await fetch("src/ui/card/templatecard.html.inc");
+const template = await templateFile.text();
+
+let CardView = {
+  render: function (data) {
+    let html = "";
+    for (let obj of data) {
+      html += genericRenderer(template, obj);
+    }
+    return html;
+  },
+};
+
+export { CardView };

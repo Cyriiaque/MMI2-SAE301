@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAE 3.01 - Client side</title>
+  <link rel="icon" type="image/png" href="./src/assets/nike.svg">
+  <link rel="stylesheet" href="./src/dist/output.css" />
+</head>
+
+<body class="bg-white-color font-base">
+  <nav class="bg-white-color border-light-grey-color shadow-md relative z-50">
+    <div
+      class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center text-center justify-between mx-auto p-4 h-16">
+      <a href="#" id="accueil" class="flex items-center space">
+        <picture>
+          <source srcset="./src/assets/nike2.svg" media="(min-width: 48em)" />
+          <img src="./src/assets/nike.svg" alt="" class="w-10" />
+        </picture>
+      </a>
+
+      <div class="flex items-center md:order-2 space-x-1 md:space-x-2">
+        <div class="md:flex md:flex-row bg-white-color hidden justify-center items-center gap-4 w-full" id="menu-mobile">
+          <h3 id="accountname" class="text-black-color font-medium rounded-lg text-sm px-4 py-2 md:py-2.5" id="profile">
+          </h3>
+          <a href="#" id="logout"></a>
+        </div>
+
+        <a href="./signin.html" id="login"
+          class="text-black-color hover:bg-light-grey-color font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-btn" focusable="false"
+            viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none" aria-label="Profile">
+            <path stroke="currentColor" stroke-width="2"
+              d="M3.75 21v-3a3.75 3.75 0 013.75-3.75h9A3.75 3.75 0 0120.25 18v3m-4.5-13.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+          </svg>
+        </a>
+        <a href="#" id="cart"
+          class="text-black-color hover:bg-light-grey-color font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img"
+            width="24px" height="24px" fill="none">
+            <path stroke="currentColor" stroke-width="1.5"
+              d="M8.25 8.25V6a2.25 2.25 0 012.25-2.25h3a2.25 2.25 0 110 4.5H3.75v8.25a3.75 3.75 0 003.75 3.75h9a3.75 3.75 0 003.75-3.75V8.25H17.5" />
+          </svg>
+        </a>
+
+        <button id="mobile-menu-button" data-collapse-toggle="mega-menu-icons" type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-black-color rounded-lg md:hidden hover:bg-light-grey-color"
+          aria-controls="mega-menu-icons" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden w-full md:block md:w-auto z-50">
+        <ul
+          class="font-medium flex items-center flex-col p-4 md:p-0 mt-4 border border-light-grey-color rounded-lg bg-white-color md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white" id="menu-category">
+          <section id="category" class="w-32 md:w-auto flex md:flex-row flex-col md:gap-8"></section>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <section id="main" class="shadow-md mb-4"></section>
+  <footer class="bg-white-color flex flex-col text-center py-8">
+    <section class="flex gap-2 flex-wrap md:flex-row flex-col justify-around items-center md:items-start">
+      <div class="flex justify-center items-center flex-col text-sm">
+        <h2 class="text-black-color font-semibold">Ressources</h2>
+        <ul class="text-grey-color flex justify-center items-center flex-col text-sm">
+          <li>Cartes cadeaux</li>
+          <li>Trouver un magasin</li>
+          <li>Nike Journal</li>
+          <li>Devenir membre</li>
+        </ul>
+      </div>
+      <div class="flex justify-center items-center flex-col">
+        <h2 class="text-black-color font-semibold">Aide</h2>
+        <ul class="text-grey-color flex justify-center items-center flex-col text-sm">
+          <li>Aide</li>
+          <li>Status de la commande</li>
+          <li>Expédition</li>
+          <li>Retours</li>
+        </ul>
+      </div>
+      <div class="flex justify-center items-center flex-col">
+        <h2 class="text-black-color font-semibold">Entreprise</h2>
+        <ul class="text-grey-color flex justify-center items-center flex-col text-sm">
+          <li>A propos de Nike</li>
+          <li>Actualités</li>
+          <li>Carrières</li>
+          <li>Investisseurs</li>
+        </ul>
+      </div>
+    </section>
+    <div class="flex flex-row py-4 items-center justify-center">
+      <ul class="flex flex-row flex-wrap text-sm items-center justify-center gap-2 text-center">
+        <li>© 2024 Nike, Inc. Tous droits réservés</li>
+        <li>Guides</li>
+        <li>Conditions d'utilisation</li>
+        <li>Conditions générales de vente</li>
+        <li>Informations sur l’entreprise</li>
+      </ul>
+    </div>
+  </footer>
+  <script type="module" src="src/main.js"></script>
+</body>
+
+</html>
