@@ -101,7 +101,6 @@ C.loadPanierTemplate = async function () {
   let htmlCart = PanierView.render(dataCart);
 
   const cartElement = document.querySelector("#panier");
-  console.log(cartElement);
   if (cartElement) {
     cartElement.innerHTML = htmlCart;
   } else {
@@ -357,6 +356,28 @@ C.loadCardTemplate = async function (ev) {
     let priceValueElement = document.querySelector("#price-value");
     let promoValue = parseFloat(promoValueElement.textContent);
     let priceValue = parseFloat(priceValueElement.textContent);
+    let stock = document.querySelector("#viewStock");
+    let stockValue = parseFloat(stock.textContent);
+    if (stockValue === 0) {
+      let addcart = document.querySelector("#addToCart");
+      addcart.classList.add("hidden");
+      let infoElement = document.querySelector("#info");
+      let infoStock = document.createElement("h3");
+      infoStock.textContent = "Rupture de stock";
+      infoElement.appendChild(infoStock);
+    }
+    else if (stockValue === 1) {
+      let infoElement = document.querySelector("#info");
+      let infoStock = document.createElement("h3");
+      infoStock.textContent = "Dernier article en stock";
+      infoElement.appendChild(infoStock);
+    }
+    else if (stockValue < 5) {
+      let infoElement = document.querySelector("#info");
+      let infoStock = document.createElement("h3");
+      infoStock.textContent = "Bientôt en rupture de stock";
+      infoElement.appendChild(infoStock);
+    }
 
     if (promoValue > 0) {
       let discountedPrice = priceValue - (priceValue * promoValue) / 100;
@@ -389,28 +410,37 @@ C.loadCardTemplate = async function (ev) {
       }
     });
   }
-  let selectedColorValue = getSelectedColor();
-  console.log("Default selected color:", selectedColorValue);
-  selectedColorValue = selectedColor;
-
+  
   let defaultSelectedSize = getSelectedSize();
-  console.log("Default selected size:", defaultSelectedSize);
   defaultSelectedSize = selectedSize;
 
+  let selectedColorValue = getSelectedColor();
+  selectedColorValue = selectedColor;
+
+
   let value = document.querySelector("#sizes");
-  value.addEventListener("change", getSelectedSize);
+  value.addEventListener("change",getSelectedSize);
 
   let colorsValue = document.querySelectorAll("#color div");
   colorsValue.forEach((colorElement) => {
     colorElement.addEventListener("click", (ev) => {
       selectedColorValue = getSelectedColor(ev);
-      console.log("Selected color:", selectedColorValue);
     });
   });
   addtocart();
 
   let submit_addcart = document.querySelector("#addcart");
-  submit_addcart.addEventListener("click", C.handler_addcart);
+  submit_addcart.addEventListener("click", (ev) => {
+    C.handler_addcart(ev);
+    let stockElement = document.querySelector("#viewStock");
+    let stockValue = parseInt(stockElement.textContent, 10);
+    stockValue -= 1;
+    stockElement.textContent = stockValue;
+    if (stockValue <= 0) {
+      let addcart = document.querySelector("#addToCart");
+      addcart.classList.add("hidden");
+    }
+  });
 };
 
 let selectedSize;
@@ -458,7 +488,7 @@ async function addtocart() {
   }
 }
 
-function getSelectedColor(ev) {
+async function getSelectedColor(ev) {
   if (ev) {
     const colorElement = ev.target.closest("div");
     if (colorElement) {
@@ -467,26 +497,25 @@ function getSelectedColor(ev) {
       );
       if (colorClass) {
         selectedColor = colorClass.split("-")[1];
-        addtocart();
-        return selectedColor;
+      }
+    }
+  } else {
+    const firstColorElement = document.querySelector("#color div");
+    if (firstColorElement) {
+      const colorClass = Array.from(firstColorElement.classList).find(
+        (cls) => cls.startsWith("bg-") && cls.endsWith("-color")
+      );
+      if (colorClass) {
+        selectedColor = colorClass.split("-")[1];
       }
     }
   }
-  const firstColorElement = document.querySelector("#color div");
-  if (firstColorElement) {
-    const colorClass = Array.from(firstColorElement.classList).find(
-      (cls) => cls.startsWith("bg-") && cls.endsWith("-color")
-    );
-    if (colorClass) {
-      selectedColor = colorClass.split("-")[1];
-      addtocart();
-      return selectedColor;
-    }
-  }
+
+  addtocart();
   return selectedColor;
 }
 
-function getSelectedSize() {
+async function getSelectedSize() {
   const selectElement = document.getElementById("sizes");
   selectedSize = selectElement.value;
   addtocart();
@@ -516,7 +545,14 @@ C.init();
 
 const mobileMenuButton = document.getElementById("mobile-menu-button");
 const mobileMenu = document.getElementById("mobile-menu");
+const menuMobile = document.getElementById("menu-mobile");
+const menuCategory = document.getElementById("menu-category");
 
 mobileMenuButton.addEventListener("click", () => {
+  while (menuMobile.firstChild) {
+    menuCategory.appendChild(menuMobile.firstChild);
+  }
+  
   mobileMenu.classList.toggle("hidden");
+  menuMobile.classList.toggle("hidden");
 });

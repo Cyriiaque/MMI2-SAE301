@@ -41,7 +41,7 @@
       <form
         method="DELETE"
         action="../api/cart/del"
-        class="flex flex-col w-96 mt-12"
+        class="flex flex-col mt-12"
       >
         <input
           type="number"
@@ -69,7 +69,7 @@
       <form
         method="POST"
         action="../api/cart/add"
-        class="flex flex-col w-96 mt-12"
+        class="flex flex-col mt-12"
       >
         <input
           type="number"

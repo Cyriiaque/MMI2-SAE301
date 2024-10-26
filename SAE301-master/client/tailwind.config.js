@@ -2,7 +2,10 @@
 export default {
   content: [
     "./index.html",
+    "./signup.html",
+    "./signin.html",
     "./src/**/*.{inc,html}",
+    "./../index.html",
   ],
   theme: {
     extend: {

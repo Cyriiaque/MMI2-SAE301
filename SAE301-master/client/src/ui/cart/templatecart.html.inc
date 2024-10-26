@@ -1,4 +1,4 @@
-<h1 class="text-black-color font-semibold text-2xl py-4 pl-32 md:pl-64">
+<h1 class="text-black-color font-semibold text-2xl py-4 pl-32 md:pl-64" id="cartTitle">
   Panier
 </h1>
 <div
@@ -6,7 +6,7 @@
 >
   <section id="panier" class="m-2 p-2 flex flex-col gap-4 max-w-4xl"></section>
   <div
-    class="md:max-w-60 w-3/5 bg-white-color border-solid border-2 border-black-color py-6 px-10 flex flex-col gap-4 m-2"
+    class="md:max-w-60 w-3/5 bg-white-color border-solid border-2 border-black-color py-6 px-10 flex flex-col gap-4 m-2" id="cartInfo"
   >
     <h2 class="text-2xl font-semibold">Récapitulatif</h2>
     <h3>As-tu un code promo</h3>

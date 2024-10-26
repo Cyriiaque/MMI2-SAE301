@@ -31,7 +31,7 @@ PanierData.fetchAll = async function () {
       "text-2xl"
     );
     document.getElementById("panier").appendChild(div);
-    let cartInfoDiv = document.getElementById("cartinfo");
+    let cartInfoDiv = document.getElementById("cartInfo");
     let cartTitre = document.getElementById("cartTitle");
     if (cartInfoDiv) {
       cartInfoDiv.remove();
